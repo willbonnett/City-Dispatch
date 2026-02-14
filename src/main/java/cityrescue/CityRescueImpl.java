@@ -12,17 +12,25 @@ import cityrescue.exceptions.*;
 public class CityRescueImpl implements CityRescue {
 
     // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
+    private int[][] map;
+    private int tick;
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
         // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        if(width > 0 && height > 0){
+            this.map = new int[width][height]
+        }
+        else{
+            throw new InvalidGridException("Invalid Width/Height")
+        };
     }
 
     @Override
     public int[] getGridSize() {
         // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        return [this.map.length,this.map[0].length]
+        // throw new UnsupportedOperationException("Not implemented yet");
     }
 
     @Override
