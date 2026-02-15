@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Test set: PublicBasicsTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 0, Errors: 3, Skipped: 0, Time elapsed: 0.059 s <<< FAILURE! -- in PublicBasicsTest
+PublicBasicsTest.addObstacle_outOfBounds_throws_andStateUnchanged -- Time elapsed: 0.025 s <<< ERROR!
+java.lang.UnsupportedOperationException: Not implemented yet
+	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:205)
+	at PublicBasicsTest.addObstacle_outOfBounds_throws_andStateUnchanged(PublicBasicsTest.java:34)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+PublicBasicsTest.initialise_setsGridSize_andResetsTick -- Time elapsed: 0.006 s <<< ERROR!
+java.lang.UnsupportedOperationException: Not implemented yet
+	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:205)
+	at PublicBasicsTest.initialise_setsGridSize_andResetsTick(PublicBasicsTest.java:21)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+PublicBasicsTest.addStation_assignsIdStartingAt1 -- Time elapsed: 0.004 s <<< ERROR!
+java.lang.Error: 
+Unresolved compilation problem: 
+	Unit cannot be resolved to a type
+
+	at cityrescue.Station.<init>(Station.java:12)
+	at cityrescue.CityRescueImpl.addStation(CityRescueImpl.java:101)
+	at PublicBasicsTest.addStation_assignsIdStartingAt1(PublicBasicsTest.java:26)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
