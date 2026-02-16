@@ -2,22 +2,19 @@
 Test set: PublicOutputFormatTest
 -------------------------------------------------------------------------------
 Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 0.007 s <<< FAILURE! -- in PublicOutputFormatTest
-PublicOutputFormatTest.getStatus_containsRequiredHeadings -- Time elapsed: 0.003 s <<< ERROR!
+PublicOutputFormatTest.getStatus_containsRequiredHeadings -- Time elapsed: 0.002 s <<< ERROR!
 java.lang.UnsupportedOperationException: Not implemented yet
-	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:205)
+	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:271)
 	at PublicOutputFormatTest.getStatus_containsRequiredHeadings(PublicOutputFormatTest.java:19)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 
 PublicOutputFormatTest.viewUnit_and_viewIncident_haveStablePrefixes -- Time elapsed: 0.002 s <<< ERROR!
-java.lang.Error: 
-Unresolved compilation problem: 
-	Unit cannot be resolved to a type
-
-	at cityrescue.Station.<init>(Station.java:12)
-	at cityrescue.CityRescueImpl.addStation(CityRescueImpl.java:101)
-	at PublicOutputFormatTest.viewUnit_and_viewIncident_haveStablePrefixes(PublicOutputFormatTest.java:27)
+java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.add(Object)" because "this.units" is null
+	at cityrescue.Station.addUnit(Station.java:29)
+	at cityrescue.CityRescueImpl.addUnit(CityRescueImpl.java:161)
+	at PublicOutputFormatTest.viewUnit_and_viewIncident_haveStablePrefixes(PublicOutputFormatTest.java:28)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)

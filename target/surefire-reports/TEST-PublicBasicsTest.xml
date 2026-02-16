@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="PublicBasicsTest" time="0.059" tests="3" errors="3" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="PublicBasicsTest" time="0.051" tests="3" errors="2" skipped="0" failures="0">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.java.launcher" value="SUN_STANDARD"/>
     <property name="user.country" value="GB"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Eclipse Adoptium\jdk-25.0.1.8-hotspot\bin"/>
-    <property name="sun.java.command" value="C:\Users\willb\AppData\Local\Temp\surefire3815130929919024729\surefirebooter-20260215132249102_3.jar C:\Users\willb\AppData\Local\Temp\surefire3815130929919024729 2026-02-15T13-22-48_971-jvmRun1 surefire-20260215132249102_1tmp surefire_0-20260215132249102_2tmp"/>
+    <property name="sun.java.command" value="C:\Users\willb\AppData\Local\Temp\surefire17388343228463700414\surefirebooter-20260216133209940_3.jar C:\Users\willb\AppData\Local\Temp\surefire17388343228463700414 2026-02-16T13-32-09_824-jvmRun1 surefire-20260216133209940_1tmp surefire_0-20260216133209940_2tmp"/>
     <property name="jdk.debug" value="release"/>
     <property name="test" value="Public*Test"/>
     <property name="surefire.test.class.path" value="C:\Uni Code\City-Dispatch\target\test-classes;C:\Uni Code\City-Dispatch\target\classes;C:\Users\willb\.m2\repository\org\junit\jupiter\junit-jupiter\5.10.2\junit-jupiter-5.10.2.jar;C:\Users\willb\.m2\repository\org\junit\jupiter\junit-jupiter-api\5.10.2\junit-jupiter-api-5.10.2.jar;C:\Users\willb\.m2\repository\org\opentest4j\opentest4j\1.3.0\opentest4j-1.3.0.jar;C:\Users\willb\.m2\repository\org\junit\platform\junit-platform-commons\1.10.2\junit-platform-commons-1.10.2.jar;C:\Users\willb\.m2\repository\org\apiguardian\apiguardian-api\1.1.2\apiguardian-api-1.1.2.jar;C:\Users\willb\.m2\repository\org\junit\jupiter\junit-jupiter-params\5.10.2\junit-jupiter-params-5.10.2.jar;C:\Users\willb\.m2\repository\org\junit\jupiter\junit-jupiter-engine\5.10.2\junit-jupiter-engine-5.10.2.jar;C:\Users\willb\.m2\repository\org\junit\platform\junit-platform-engine\1.10.2\junit-platform-engine-1.10.2.jar;"/>
@@ -31,7 +31,7 @@
     <property name="line.separator" value="&#10;"/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
-    <property name="surefire.real.class.path" value="C:\Users\willb\AppData\Local\Temp\surefire3815130929919024729\surefirebooter-20260215132249102_3.jar"/>
+    <property name="surefire.real.class.path" value="C:\Users\willb\AppData\Local\Temp\surefire17388343228463700414\surefirebooter-20260216133209940_3.jar"/>
     <property name="user.script" value=""/>
     <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
     <property name="java.runtime.version" value="25.0.1+8-LTS"/>
@@ -61,35 +61,23 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="addObstacle_outOfBounds_throws_andStateUnchanged" classname="PublicBasicsTest" time="0.025">
+  <testcase name="addObstacle_outOfBounds_throws_andStateUnchanged" classname="PublicBasicsTest" time="0.024">
     <error message="Not implemented yet" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: Not implemented yet
-	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:205)
+	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:271)
 	at PublicBasicsTest.addObstacle_outOfBounds_throws_andStateUnchanged(PublicBasicsTest.java:34)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 ]]></error>
   </testcase>
-  <testcase name="initialise_setsGridSize_andResetsTick" classname="PublicBasicsTest" time="0.006">
+  <testcase name="initialise_setsGridSize_andResetsTick" classname="PublicBasicsTest" time="0.003">
     <error message="Not implemented yet" type="java.lang.UnsupportedOperationException"><![CDATA[java.lang.UnsupportedOperationException: Not implemented yet
-	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:205)
+	at cityrescue.CityRescueImpl.getStatus(CityRescueImpl.java:271)
 	at PublicBasicsTest.initialise_setsGridSize_andResetsTick(PublicBasicsTest.java:21)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
 ]]></error>
   </testcase>
-  <testcase name="addStation_assignsIdStartingAt1" classname="PublicBasicsTest" time="0.004">
-    <error message="Unresolved compilation problem: &#10;	Unit cannot be resolved to a type&#10;" type="java.lang.Error"><![CDATA[java.lang.Error: 
-Unresolved compilation problem: 
-	Unit cannot be resolved to a type
-
-	at cityrescue.Station.<init>(Station.java:12)
-	at cityrescue.CityRescueImpl.addStation(CityRescueImpl.java:101)
-	at PublicBasicsTest.addStation_assignsIdStartingAt1(PublicBasicsTest.java:26)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-]]></error>
-  </testcase>
+  <testcase name="addStation_assignsIdStartingAt1" classname="PublicBasicsTest" time="0.003"/>
 </testsuite>

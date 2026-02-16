@@ -1,5 +1,7 @@
 package cityrescue;
 
+import java.util.ArrayList;
+
 public class Station {
 
     private final int id;
@@ -9,7 +11,7 @@ public class Station {
 
     private int capacity;
     private int unitCount;
-    private Unit[] unitIDs;
+    private ArrayList<Unit> units;
 
 
 
@@ -21,6 +23,20 @@ public class Station {
         this.x = x;
         this.y = y;
         this.capacity = 50;
+    }
+
+    public void addUnit(Unit unit){
+        this.units.add(unit);
+        this.unitCount++;
+    }
+
+    public void removeUnit(int unitId){
+        for(int i=0;i<this.units.size();i++){
+            if(this.units.get(i).unitId == unitId){
+                this.units.remove(i);
+                this.unitCount--;
+            }
+        }
     }
 
     public int getStationID(){
@@ -39,4 +55,14 @@ public class Station {
         return this.unitCount;
     }
 
+    public int[] getLocation(){
+        return new int[] {this.x,this.y};
+    }
+
+    public boolean hasSpareCapacity(){
+        return this.capacity > this.unitCount;
+    }
+    public ArrayList<Unit> getUnits(){
+        return this.units;
+    }
 }

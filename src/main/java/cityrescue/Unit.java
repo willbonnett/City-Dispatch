@@ -1,5 +1,10 @@
 package cityrescue;
 
+
+import cityrescue.enums.IncidentType;
+import cityrescue.enums.UnitStatus;
+import cityrescue.enums.UnitType;
+
 public abstract class Unit{
     protected final int unitId;
     protected final UnitType type;
@@ -15,14 +20,18 @@ public abstract class Unit{
     public abstract boolean canHandle(IncidentType type);
     public abstract int getTicksToResolve(int severity);
 
-    protected Unit(int id, Unittype type, int x,int y, int homeStationId){
+    protected Unit(int id, UnitType type, int x,int y, int homeStationId){
         this.unitId = id;
         this.type = type;
         this.x = x;
         this.y = y;
         this.homeStationId = homeStationId;
 
-        this.status = UnitStatus.Idle;
+        this.status = UnitStatus.IDLE;
         this.assignedIncidentId = -1;
+    }
+
+    protected UnitStatus returnStatus(){
+        return this.status;
     }
 }

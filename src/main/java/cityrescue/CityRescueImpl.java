@@ -3,6 +3,7 @@ package cityrescue;
 import java.util.ArrayList;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitType;
+import cityrescue.enums.UnitStatus;
 import cityrescue.exceptions.IDNotRecognisedException;
 import cityrescue.exceptions.InvalidCapacityException;
 import cityrescue.exceptions.InvalidGridException;
@@ -29,6 +30,7 @@ public class CityRescueImpl implements CityRescue {
     // Counters
     private ArrayList<Station> stations;
     private int stationId;
+    private int unitId;
 
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
@@ -46,6 +48,7 @@ public class CityRescueImpl implements CityRescue {
         this.tick = 0;
         this.stations = new ArrayList<Station>();
         this.stationId = 1;
+        this.unitId = 1;
     }
 
     @Override
@@ -142,14 +145,58 @@ public class CityRescueImpl implements CityRescue {
 
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+
+        for(int i = 0; i<this.stations.size();i++){
+            if(this.stations.get(i).getStationID()== stationId){
+                if(this.stations.get(i).hasSpareCapacity()){
+                    switch(type){
+                        case POLICE_CAR ->
+                            this.stations.get(i).addUnit(new PoliceCar(
+                                this.unitId,
+                                this.stations.get(i).getLocation()[0],
+                                this.stations.get(i).getLocation()[1],
+                                this.stations.get(i).getStationID()
+                            ));
+                        case FIRE_ENGINE ->
+                            this.stations.get(i).addUnit(new FireEngine(
+                                this.unitId,
+                                this.stations.get(i).getLocation()[0],
+                                this.stations.get(i).getLocation()[1],
+                                this.stations.get(i).getStationID()
+                            ));
+                        case AMBULANCE ->
+                            this.stations.get(i).addUnit(new Ambulance(
+                                this.unitId,
+                                this.stations.get(i).getLocation()[0],
+                                this.stations.get(i).getLocation()[1],
+                                this.stations.get(i).getStationID()
+                            ));
+                        default -> throw new InvalidUnitException("Invalid Unit Type");
+                    }
+                    return this.unitId++;
+                }
+                throw new IllegalStateException("Station full");
+            }
+            throw new IDNotRecognisedException("StationId not recognised");
+        }
+        return -1;
     }
 
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
-        // TODO: implement
-        throw new UnsupportedOperationException("Not implemented yet");
+        
+        for(int i = 0; i<this.stations.size();i++){
+            for(int j=0;j<this.stations.get(i).getUnits().size();j++){
+                if(this.stations.get(i).getUnits().get(j).unitId == unitId){
+                    if(this.stations.get(i).getUnits().get(j).returnStatus() == UnitStatus.IDLE){
+                        this.stations.get(i).removeUnit(unitId);
+                        return;
+                    }
+                    throw new IllegalStateException("Unit not in IDLE status");
+                }
+            }
+            throw new IDNotRecognisedException("Unit ID not found");
+        }
     }
 
     @Override

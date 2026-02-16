@@ -3,18 +3,18 @@ package cityrescue;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitType;
 
-public class Ambulance extends Unit{
-    public Ambulance(int id, int x, int y, int homeStationId){
-        super(id,UnitType.AMBULANCE,x,y,homeStationId);
+public class PoliceCar extends Unit{
+    public PoliceCar(int id, int x, int y, int homeStationId){
+        super(id,UnitType.POLICE_CAR, x,y,homeStationId);
     }
-    
+
     @Override
     public boolean canHandle(IncidentType type){
-        return type == IncidentType.MEDICAL;
+        return type == IncidentType.CRIME;
     }
 
     @Override
     public int getTicksToResolve(int severity){
-        return 2;
+        return 3;
     }
 }
