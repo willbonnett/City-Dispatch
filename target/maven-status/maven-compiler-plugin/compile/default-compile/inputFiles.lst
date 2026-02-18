@@ -14,6 +14,8 @@ C:\Uni Code\City-Dispatch\src\main\java\cityrescue\exceptions\InvalidNameExcepti
 C:\Uni Code\City-Dispatch\src\main\java\cityrescue\exceptions\InvalidSeverityException.java
 C:\Uni Code\City-Dispatch\src\main\java\cityrescue\exceptions\InvalidUnitException.java
 C:\Uni Code\City-Dispatch\src\main\java\cityrescue\FireEngine.java
+C:\Uni Code\City-Dispatch\src\main\java\cityrescue\Incident.java
+C:\Uni Code\City-Dispatch\src\main\java\cityrescue\OwnTest.java
 C:\Uni Code\City-Dispatch\src\main\java\cityrescue\PoliceCar.java
 C:\Uni Code\City-Dispatch\src\main\java\cityrescue\Station.java
 C:\Uni Code\City-Dispatch\src\main\java\cityrescue\Unit.java

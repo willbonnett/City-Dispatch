@@ -23,6 +23,7 @@ public class Station {
         this.x = x;
         this.y = y;
         this.capacity = 50;
+        this.units = new ArrayList<Unit>();
     }
 
     public void addUnit(Unit unit){

@@ -1,13 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: PublicDispatchTest
 -------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 0.006 s <<< FAILURE! -- in PublicDispatchTest
-PublicDispatchTest.dispatch_assignsClosestEligibleUnit_thenLowestUnitId -- Time elapsed: 0.004 s <<< ERROR!
-java.lang.NullPointerException: Cannot invoke "java.util.ArrayList.add(Object)" because "this.units" is null
-	at cityrescue.Station.addUnit(Station.java:29)
-	at cityrescue.CityRescueImpl.addUnit(CityRescueImpl.java:154)
-	at PublicDispatchTest.dispatch_assignsClosestEligibleUnit_thenLowestUnitId(PublicDispatchTest.java:20)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
-
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.012 s -- in PublicDispatchTest

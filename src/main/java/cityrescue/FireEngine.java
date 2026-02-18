@@ -5,7 +5,7 @@ import cityrescue.enums.UnitType;
 
 public class FireEngine extends Unit{
     public FireEngine(int id, int x, int y, int homeStationId){
-        super(id,UnitType.FIRE_ENGINE,x,y,homeStationId);
+        super(id,UnitType.FIRE_ENGINE,x,y,homeStationId,x,y);
     }
 
     @Override

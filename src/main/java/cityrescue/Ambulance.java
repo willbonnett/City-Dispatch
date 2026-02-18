@@ -5,7 +5,7 @@ import cityrescue.enums.UnitType;
 
 public class Ambulance extends Unit{
     public Ambulance(int id, int x, int y, int homeStationId){
-        super(id,UnitType.AMBULANCE,x,y,homeStationId);
+        super(id,UnitType.AMBULANCE,x,y,homeStationId,x,y);
     }
     
     @Override
