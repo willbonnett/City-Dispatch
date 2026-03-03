@@ -1,7 +1,5 @@
 package cityrescue;
 
-import java.util.ArrayList;
-
 public class Station {
 
     private final int id;
@@ -11,7 +9,7 @@ public class Station {
 
     private int capacity;
     private int unitCount;
-    private ArrayList<Unit> units;
+    private Unit[] units;
 
 
 
@@ -23,19 +21,25 @@ public class Station {
         this.x = x;
         this.y = y;
         this.capacity = 50;
-        this.units = new ArrayList<Unit>();
+        this.units = new Unit[this.capacity];
     }
 
     public void addUnit(Unit unit){
-        this.units.add(unit);
-        this.unitCount++;
+        if (this.unitCount < this.capacity) {
+            this.units[this.unitCount] = unit;
+            this.unitCount++;
+        }
     }
 
     public void removeUnit(int unitId){
-        for(int i=0;i<this.units.size();i++){
-            if(this.units.get(i).unitId == unitId){
-                this.units.remove(i);
+        for(int i = 0; i < this.unitCount; i++){
+            if(this.units[i].getId() == unitId){ 
+                for(int j = i; j < this.unitCount - 1; j++){
+                    this.units[j] = this.units[j+1];
+                }
+                this.units[this.unitCount - 1] = null;
                 this.unitCount--;
+                return;
             }
         }
     }
@@ -48,8 +52,13 @@ public class Station {
         return this.capacity;
     }
 
-    public void setCapaity(int capacity){
-        this.capacity=capacity;
+    public void setCapacity(int capacity){ 
+        this.capacity = capacity;
+        Unit[] newUnits = new Unit[capacity];
+        for(int i = 0; i < this.unitCount; i++) {
+            newUnits[i] = this.units[i];
+        }
+        this.units = newUnits;
     }
 
     public int getUnitCount(){
@@ -63,7 +72,9 @@ public class Station {
     public boolean hasSpareCapacity(){
         return this.capacity > this.unitCount;
     }
-    public ArrayList<Unit> getUnits(){
-        return this.units;
+    public Unit[] getUnits(){
+        Unit[] activeUnits = new Unit[this.unitCount];
+        System.arraycopy(this.units, 0, activeUnits, 0, this.unitCount);
+        return activeUnits;
     }
 }

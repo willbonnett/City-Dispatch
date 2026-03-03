@@ -39,72 +39,89 @@ public abstract class Unit{
         this.assignedIncidentId = -1;
     }
 
-    protected void Tick(boolean[][] blocked){
-        
-        // Apply Movement rule if status is EN_ROUTE
+    public void Tick(boolean[][] blocked){
+        if(this.status == UnitStatus.IDLE){
+        return; 
+        }
         if(this.status == UnitStatus.EN_ROUTE){
             int[][] candidates = new int[][]{{0,-1},{1,0},{0,1},{-1,0}};
-            for(int[] direc:candidates){
-                // check if direction is blocked
-                try{
-                    if(blocked[this.x+direc[0]][this.y+direc[1]]){
-                        // Move not legal, check next direction
+            int firstValidX = -1;
+            int firstValidY = -1;
+            boolean foundValidMove = false;
+            for(int[] direc : candidates){
+                int nextX = this.x + direc[0];
+                int nextY = this.y + direc[1];
+                
+                try {
+                    if(blocked[nextX][nextY]){
                         continue;
                     }
-                }
-                catch(ArrayIndexOutOfBoundsException e){
+                } catch(ArrayIndexOutOfBoundsException e){
                     continue;
                 }
-                if(this.getDistanceFrom(this.x+direc[0],this.y+direc[1],this.incidentX,this.incidentY)<this.getDistanceFrom(this.incidentX,this.incidentY)){
-                    // Move reduced distance, take move
-                    this.x += direc[0];
-                    this.y += direc[1];
+                if(!foundValidMove){
+                    firstValidX = nextX;
+                    firstValidY = nextY;
+                    foundValidMove = true;
+                }
+          
+                if(this.getDistanceFrom(nextX, nextY, this.incidentX, this.incidentY) < this.getDistanceFrom(this.incidentX, this.incidentY)){
+         
+                    this.x = nextX;
+                    this.y = nextY;
 
-                    // Check if Unit is at incident
+           
                     if(this.x == this.incidentX && this.y == this.incidentY){
-                        // Unit At scene
+             
                         this.status = UnitStatus.AT_SCENE;
                         this.workremaining = this.getTicksToResolve(this.assignedIncident.getSeverity());
                         this.assignedIncident.setStatus(IncidentStatus.IN_PROGRESS);
                     }
-                    return;
+                    return; 
                 }
             }
+            if(foundValidMove){
+                this.x = firstValidX;
+                this.y = firstValidY;
+}
         }
 
-        // Reduce work remaining when at scene
+  
         if(this.status == UnitStatus.AT_SCENE){
             this.workremaining--;
 
-            if (this.workremaining == 0){
-                // Incident has been resolved
+            if (this.workremaining <= 0){ 
+  
                 this.assignedIncident.resolve();
                 this.status = UnitStatus.IDLE;
                 this.assignedIncident = null;
                 this.assignedIncidentId = -1;
-                this.incidentY = this.homeStationId;
-                this.incidentX = 0;
+                this.incidentX = -1; 
+                this.incidentY = -1; 
             }
         }
 
-        // If idle, return to station
         if(this.status == UnitStatus.IDLE){
+            if(this.x == this.homeStationX && this.y == this.homeStationY) {
+                return;
+            }
+
             int[][] candidates = new int[][]{{0,-1},{1,0},{0,1},{-1,0}};
-            for(int[] direc:candidates){
-                // check if direction is blocked
-                try{
-                    if(blocked[this.x+direc[0]][this.y+direc[1]]){
-                        // Move not legal, check next direction
+            for(int[] direc : candidates){
+                int nextX = this.x + direc[0];
+                int nextY = this.y + direc[1];
+                
+                try {
+                    if(blocked[nextX][nextY]){
                         continue;
                     }
-                }
-                catch(ArrayIndexOutOfBoundsException e){
+                } catch(ArrayIndexOutOfBoundsException e){
                     continue;
                 }
-                if(this.getDistanceFrom(this.x+direc[0],this.y+direc[1],this.homeStationX,this.homeStationY)<this.getDistanceFrom(this.homeStationX,this.homeStationY)){
-                    // Move reduced distance, take move
-                    this.x += direc[0];
-                    this.y += direc[1];
+                if(this.getDistanceFrom(nextX, nextY, this.homeStationX, this.homeStationY) < this.getDistanceFrom(this.homeStationX, this.homeStationY)){
+                    this.x = nextX;
+                    this.y = nextY;
+                    return;
                 }
             }
         }
@@ -120,10 +137,17 @@ public abstract class Unit{
     }
 
     protected String viewUnit(){
-        return "U#"+this.unitId+" TYPE="+this.type+" HOME="+this.homeStationId+" LOC=("+this.x+","+this.y+") STATUS="+this.status+" INCIDENT="+this.assignedIncidentId+" WORK="+this.workremaining;
+        String incString = (this.assignedIncidentId == -1) ? "-" : String.valueOf(this.assignedIncidentId);
+        String baseString = "U#"+this.unitId+" TYPE="+this.type+" HOME="+this.homeStationId+
+                        " LOC=("+this.x+","+this.y+") STATUS="+this.status+" INCIDENT="+incString;
+        if(this.status == UnitStatus.AT_SCENE){
+        return baseString + " WORK=" + this.workremaining;
+    }
+    
+    return baseString;
     }
 
-    protected void assign(Incident incident){
+    public void assign(Incident incident){
         this.assignedIncident = incident; 
         this.assignedIncidentId = incident.getId();
         this.incidentX = incident.getLoc()[0];
@@ -148,7 +172,7 @@ public abstract class Unit{
         this.status = status;
     }
     
-    protected int getId(){
+    public int getId(){
         return this.unitId;
     }
 }
