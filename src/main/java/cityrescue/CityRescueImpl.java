@@ -290,6 +290,8 @@ public class CityRescueImpl implements CityRescue {
     /**
      * @param unitId the Id of the unit being put out of service
      * @param outOfService boolean whether the unit is currently out of service
+     * @throws IDNotRecognisedException the unit Id is not found in the array of units
+     * @throws IllegalStateException if the unit Id is null
      */
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
@@ -318,7 +320,9 @@ public class CityRescueImpl implements CityRescue {
         }
         throw new IllegalStateException("Illegal Status");
     }
-
+    /**
+     * @return unit Ids
+     */
     @Override
     public int[] getUnitIds() {
         int[] ids = new int[this.globalUnitCount];
@@ -333,7 +337,11 @@ public class CityRescueImpl implements CityRescue {
         }
         return ids;
     }
-
+    /**
+     * @param unitId the Id of the unit being viewed
+     * @throws IDNotRecognisedException if the Id is not found in the array of units
+     * @return a string of infomation about a unit
+     */
     @Override
     public String viewUnit(int unitId) throws IDNotRecognisedException {
         Unit unit = null;
@@ -352,7 +360,15 @@ public class CityRescueImpl implements CityRescue {
         }
         return unit.viewUnit(); 
     }
-
+    /**
+     * @param type the type of incident being reported
+     * @param serverity the serverity of the incident
+     * @param x the x coordinate of the incident
+     * @param y the y coordinate of the incident
+     * @throws InvalidSeverityException the serverity is less than 1 or greater than 5 
+     * @throws InvalidLocationException the location of the incident is outside of the grid
+     * @return incident Id
+     */
     @Override
 public int reportIncident(IncidentType type, int severity, int x, int y) throws InvalidSeverityException, InvalidLocationException {
     
@@ -374,7 +390,11 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
     this.incidentCount++;
     return this.incidentId++;
 }
-
+    /**
+     * @param incidentId the Id of the incident
+     * @throws IDNotRecognisedException if the the incident Id is not found in the array of incidents
+     * @throws IllegalStateException if the state of the incident is resolved, cancelled or in progress
+     */
     @Override
     public void cancelIncident(int incidentId) throws IDNotRecognisedException, IllegalStateException {
         Incident incident = null;
