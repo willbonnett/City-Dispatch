@@ -13,33 +13,41 @@ import cityrescue.exceptions.InvalidSeverityException;
 import cityrescue.exceptions.InvalidUnitException;
 
 /**
- * CityRescueImpl (Starter)
- *
- * Your task is to implement the full specification.
- * You may add additional classes in any package(s) you like.
+ * CityRescueImpl
+ 
  */
 public class CityRescueImpl implements CityRescue {
 
 
-
+    /**The interger grid used for the map */
     private int[][] map;
+    /**Whether a coordinate is blocked */
     private boolean[][] blocked;
-
+    /**The current tick cycle */
     private int tick;
-
+    /**The max number of stations */
     private static final int maxStations = 20;
+    /**the max number of incidents */
     private static final int maxIncidents = 200;
 
     // Counters
+    /**the array of stations */
     private Station[] stations;
+    /**the number of stations in the array */
     private int stationCount;
+    /**the array of incidents */
     private Incident[] incidents;
+    /**the number of incidents in the array */
     private int incidentCount;
-
+    /**the Id for a station */
     private int stationId;
+    /**the Id for a unit */
     private int unitId;
+    /**the Id for an incident */
     private int incidentId;
+    /**the total number of units */
     private int globalUnitCount;
+    /**the total number of obstacles */
     private int obstacleCount;
 
     /** 
