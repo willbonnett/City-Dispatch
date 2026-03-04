@@ -27,8 +27,8 @@ public class CityRescueImpl implements CityRescue {
 
     private int tick;
 
-    private static final int maxStations = 100;
-    private static final int maxIncidents = 1000;
+    private static final int maxStations = 20;
+    private static final int maxIncidents = 200;
 
     // Counters
     private Station[] stations;
