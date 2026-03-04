@@ -20,7 +20,6 @@ import cityrescue.exceptions.InvalidUnitException;
  */
 public class CityRescueImpl implements CityRescue {
 
-    // TODO: add fields (map, arrays for stations/units/incidents, counters, tick, etc.)
 
     private int[][] map;
     private boolean[][] blocked;
