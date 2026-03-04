@@ -415,6 +415,14 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
         incident.cancelIncident();
     }
 
+    /**
+     * Escalates the Incident to a new severity
+     * @param incidentId ID of Incident to change severity
+     * @param newSeverity New Severity
+     * @throws IDNotRecognisedException If Incident ID not found
+     * @throws InvalidSeverityException If new severity not between 1-5 inclusive
+     * @throws IllegalStateException If Incident is already resolved or cancelled
+     */
     @Override
     public void escalateIncident(int incidentId, int newSeverity) throws IDNotRecognisedException, InvalidSeverityException, IllegalStateException {
         Incident incident = null;
@@ -434,12 +442,16 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
         }
 
         if(incident.getStatus() == IncidentStatus.CANCELLED || incident.getStatus() == IncidentStatus.RESOLVED){
-            throw new InvalidSeverityException("Illegal Incident Status");
+            throw new IllegalStateException("Illegal Incident Status");
         }
 
         incident.setSeverity(newSeverity);
     }
 
+    /**
+     * Gets all the Incident Ids
+     * @return int[] ids of all incidents
+     */
     @Override
     public int[] getIncidentIds() {
         int[] ids = new int[this.incidentCount];
@@ -449,6 +461,12 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
         return ids;
     }
 
+    /**
+     * Returns the string Representation of the passed in Incident Id
+     * @param incidentId ID of desired incident
+     * @throws IDNotRecognisedException If the Incident Id is not found
+     * @return String String Representation
+     */
     @Override
     public String viewIncident(int incidentId) throws IDNotRecognisedException {
         for(int i = 0; i < this.incidentCount; i++){
@@ -458,6 +476,10 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
         }
         throw new IDNotRecognisedException("Id Not Found");
     }
+
+    /**
+     * Iterates through each of the incidents and assigns the first available unit that will resolve the incident
+     */
     @Override
     public void dispatch() {
         for (int i = 0; i < this.incidentCount; i++){
@@ -493,6 +515,11 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
         }
     }
 
+    /**
+     * Function that increases the simulation by one tick
+     * 
+     * Iterates through each of the units and runs the tick() function.
+     */
     @Override
     public void tick() {
         for(int i = 0; i < this.stationCount; i++){
@@ -504,6 +531,10 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
         this.tick++;
     }
 
+    /**
+     * Returns the String Representation of the entire System
+     * @return String String Representation
+     */
     @Override
     public String getStatus() {
         StringBuilder sb = new StringBuilder();

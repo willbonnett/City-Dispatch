@@ -3,6 +3,9 @@ package cityrescue;
 import cityrescue.enums.IncidentType;
 import cityrescue.enums.UnitType;
 
+/**
+ * Representation of the Ambulance Class
+ */
 public class Ambulance extends Unit{
     /**
      * Constructor of the Ambulance Class
