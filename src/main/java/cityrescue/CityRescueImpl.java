@@ -21,6 +21,7 @@ import cityrescue.exceptions.InvalidUnitException;
 public class CityRescueImpl implements CityRescue {
 
 
+
     private int[][] map;
     private boolean[][] blocked;
 
@@ -41,6 +42,11 @@ public class CityRescueImpl implements CityRescue {
     private int globalUnitCount;
     private int obstacleCount;
 
+    /** 
+    * @param width the width of the grid
+    * @param y the height of the grid
+    * @throws InvalidGridException if either the x or y values are equal to or less than 0
+    */
     @Override
     public void initialise(int width, int height) throws InvalidGridException {
         
@@ -48,12 +54,12 @@ public class CityRescueImpl implements CityRescue {
             throw new InvalidGridException("Invalid Width/Height");
         }
 
-        // Create Grid
+        //Create Grid
         this.map = new int[width][height];
         this.blocked = new boolean[width][height];
 
 
-        // Reset Ticks and ID values
+        //Reset Ticks and ID values
         this.tick = 0;
         this.stations = new Station[maxStations];
         this.stationCount = 0;
@@ -66,12 +72,21 @@ public class CityRescueImpl implements CityRescue {
         this.obstacleCount=0;
     }
 
+    /** 
+    * @return an interger array with the height and width of the grid
+    * @throws ArrayIndexOutOfBoundsException if the grid is not initalised
+    */
     @Override
     public int[] getGridSize() {
         
         return new int[] {this.map.length, this.map[0].length};
     }
 
+    /** 
+    * @param x the x value for obstacle
+    * @param y the y value for obstacle
+    * @throws InvalidLocationException if the x and y values give a location that is invalid 
+    */
     @Override
     public void addObstacle(int x, int y) throws InvalidLocationException {
 
@@ -84,7 +99,11 @@ public class CityRescueImpl implements CityRescue {
         this.obstacleCount++;
         this.blocked[x][y] = true;
     }
-
+    /**
+     * @param x the x value for the obstacle to be removed
+     * @param y the y value for the obstacle to be removed
+     * @throws InvalidLocationException if the x or y coordinates given are outside the grid
+     */
     @Override
     public void removeObstacle(int x, int y) throws InvalidLocationException {
         
@@ -97,7 +116,14 @@ public class CityRescueImpl implements CityRescue {
         this.obstacleCount--;
         this.blocked[x][y] = false;
     }
-
+    /**
+     * @param name the name of the station to add
+     * @param x the x coordinate of where the station is being added
+     * @param y the y coordinate of where the station is being added
+     * @throws InvalidNameException if the name is empty or null
+     * @throws InvalidLocationException if the location is blocked or outside of the grid
+     * @return the station Id
+     */
     @Override
     public int addStation(String name, int x, int y) throws InvalidNameException, InvalidLocationException {
         
@@ -118,7 +144,11 @@ public class CityRescueImpl implements CityRescue {
         this.stationCount++;
         return this.stationId++;
     }
-
+    /**
+     * @param stationId the id for the station that is being removed
+     * @throws IDNotRecognisedException if the id is not found in the array of stations
+     * @throws IllegalStateException if the station still has units in it
+     */
     @Override
     public void removeStation(int stationId) throws IDNotRecognisedException, IllegalStateException {
         for(int i = 0; i < this.stationCount; i++){
@@ -137,7 +167,12 @@ public class CityRescueImpl implements CityRescue {
         }
         throw new IDNotRecognisedException("ID not Found");
     }
-
+    /**
+     * @param stationId the station in which we are setting capacity for
+     * @param maxUnits the maximum number of units
+     * @throws IDNotRecognisedException if the station Id is not found in the array of stations
+     * @throws InvalidCapacityException if the new capacity is less than the old one
+     */
     @Override
     public void setStationCapacity(int stationId, int maxUnits) throws IDNotRecognisedException, InvalidCapacityException {
         for(int i = 0; i < this.stationCount; i++){
@@ -151,7 +186,9 @@ public class CityRescueImpl implements CityRescue {
         }
         throw new IDNotRecognisedException("ID not Found");
     }
-
+    /**
+     * @return the id of the station
+     */
     @Override
     public int[] getStationIds() {
         int[] ids = new int[this.stationCount];
@@ -160,7 +197,14 @@ public class CityRescueImpl implements CityRescue {
         }
         return ids;
     }
-
+    /**
+     * @param stationId the id of the station in which we are adding a unit
+     * @param unitType the type of unit being added
+     * @throws IDNotRecognisedException if the station Id is not found in the array of stations
+     * @throws InvalidUnitException the given unit type is not one of the valid units
+     * @throws IllegalStateException if the station is full
+     * @return unit Id
+     */
     @Override
     public int addUnit(int stationId, UnitType type) throws IDNotRecognisedException, InvalidUnitException, IllegalStateException {
         for(int i = 0; i < this.stationCount; i++){
@@ -184,7 +228,11 @@ public class CityRescueImpl implements CityRescue {
         }
         throw new IDNotRecognisedException("StationId not recognised");
     }
-
+    /**
+     * @param unitId the Id of the unit being decommissioned
+     * @throws IDNotRecognisedException if the unit Id is not found in array of units
+     * @throws IllegalStateException if the unit is still active
+     */
     @Override
     public void decommissionUnit(int unitId) throws IDNotRecognisedException, IllegalStateException {
         for(int i = 0; i < this.stationCount; i++){
@@ -202,7 +250,12 @@ public class CityRescueImpl implements CityRescue {
         }
         throw new IDNotRecognisedException("Unit ID not found");
     }
-
+    /**
+     * @param unitId the Id of the unit being transfered
+     * @param newStationId the Id of the station the unit is moving to
+     * @throws IDNotRecognisedException if the unit Id is not in the array of units
+     * @throws IllegalStateException the unit cannot be transfered due to the unit being active or the station being full
+     */
     @Override
     public void transferUnit(int unitId, int newStationId) throws IDNotRecognisedException, IllegalStateException {
         Unit unit = null;
@@ -234,7 +287,10 @@ public class CityRescueImpl implements CityRescue {
 
         throw new IllegalStateException();
     }
-
+    /**
+     * @param unitId the Id of the unit being put out of service
+     * @param outOfService boolean whether the unit is currently out of service
+     */
     @Override
     public void setUnitOutOfService(int unitId, boolean outOfService) throws IDNotRecognisedException, IllegalStateException {
         Unit unit = null;
@@ -436,7 +492,7 @@ public int reportIncident(IncidentType type, int severity, int x, int y) throws 
 
         sb.append("STATIONS=").append(this.stationCount);
         sb.append(" UNITS=").append(this.globalUnitCount);
-        sb.append(" INCIDENTS=").append(this.incidentCount);
+        sb.append(" INCIDENTS=").append(this.incidentCount == -1 ? "-" : this.incidentCount);
         sb.append(" OBSTACLES=").append(this.obstacleCount).append("\n");
         
         sb.append("INCIDENTS\n");
