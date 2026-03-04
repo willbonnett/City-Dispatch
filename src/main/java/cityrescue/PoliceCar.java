@@ -5,7 +5,7 @@ import cityrescue.enums.UnitType;
 
 
 /** 
- * Represents the Police Car units that respond to only Crime events
+ * Represents the Police Car units that respond to only CRIME events
  * 
  *
  * 
