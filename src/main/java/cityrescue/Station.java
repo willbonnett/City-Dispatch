@@ -72,9 +72,12 @@ public class Station {
     public boolean hasSpareCapacity(){
         return this.capacity > this.unitCount;
     }
-    public Unit[] getUnits(){
-        Unit[] activeUnits = new Unit[this.unitCount];
-        System.arraycopy(this.units, 0, activeUnits, 0, this.unitCount);
-        return activeUnits;
+    public Unit[] getUnits() {
+    Unit[] activeUnits = new Unit[this.unitCount];
+    for (int i = 0; i < this.unitCount; i++) {
+        activeUnits[i] = this.units[i];
     }
+    
+    return activeUnits;
+}
 }
